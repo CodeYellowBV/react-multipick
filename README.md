@@ -13,8 +13,7 @@ npm i react-multipick --save
 
 ## Usage
 
-
-Furthermore you can use these props:
+An example:
 
 ```js
 import Multipick from 'react-multipick';
