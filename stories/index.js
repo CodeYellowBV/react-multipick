@@ -101,4 +101,9 @@ storiesOf('Multipick', module)
             }
         }
         return <MyComponent />;
+    })
+    .add('disabled', () => {
+        return (
+            <Multipick disabled data={SOME_DATA} onChange={action('change')} />
+        );
     });

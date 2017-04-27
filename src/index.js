@@ -20,10 +20,12 @@ export default class Multipick extends Component {
         selectNoneText: PropTypes.string.isRequired,
         noneSelectedText: PropTypes.string.isRequired,
         onChange: PropTypes.func.isRequired,
+        disabled: PropTypes.bool,
     };
 
     static defaultProps = {
         values: [],
+        disabled: false,
         searchAppearsAfterCount: 5,
         searchPlaceholder: 'Search…',
         selectedText: '$1 of $2 selected',
@@ -88,7 +90,11 @@ export default class Multipick extends Component {
     render() {
         return (
             <Container>
-                <Button type="button" onClick={this.handleToggle}>
+                <Button
+                    type="button"
+                    onClick={this.handleToggle}
+                    disabled={this.props.disabled}
+                >
                     {this.generateButtonText()}
                 </Button>
                 {this.renderDropdown()}
