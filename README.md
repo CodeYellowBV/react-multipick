@@ -15,7 +15,7 @@ npm i react-multipick --save
 
 ## Usage
 
-An example:
+An example with three items, two of them selected:
 
 ```js
 import Multipick from 'react-multipick';
@@ -24,7 +24,6 @@ const data = [
     {
         value: '1',
         label: 'Dinosaurus',
-        selected: true,
     },
     {
         value: '2',
@@ -38,6 +37,8 @@ const data = [
 
 <Multipick
     data={data}
+    values={['1', '3']}
+    onChange={values => console.log('values', values)}
 />
 ```
 

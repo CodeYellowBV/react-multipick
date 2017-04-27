@@ -10,9 +10,9 @@ export default class Multipick extends Component {
             PropTypes.shape({
                 label: PropTypes.string.isRequired,
                 value: PropTypes.string.isRequired,
-                selected: PropTypes.bool,
             })
         ).isRequired,
+        values: PropTypes.arrayOf(PropTypes.string).isRequired,
         searchAppearsAfterCount: PropTypes.number,
         searchPlaceholder: PropTypes.string,
         selectedText: PropTypes.string.isRequired,
@@ -23,6 +23,7 @@ export default class Multipick extends Component {
     };
 
     static defaultProps = {
+        values: [],
         searchAppearsAfterCount: 5,
         searchPlaceholder: 'Search…',
         selectedText: '$1 of $2 selected',
@@ -37,13 +38,11 @@ export default class Multipick extends Component {
     };
 
     generateButtonText = () => {
-        const { data, selectedText, noneSelectedText } = this.props;
-        const count = data.length;
-        const selectedCount = data.filter(item => item.selected).length;
-        if (selectedCount > 0) {
+        const { data, values, selectedText, noneSelectedText } = this.props;
+        if (values.length > 0) {
             return selectedText
-                .replace('$1', selectedCount)
-                .replace('$2', count);
+                .replace('$1', values.length)
+                .replace('$2', data.length);
         }
         return noneSelectedText;
     };

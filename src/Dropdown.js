@@ -13,6 +13,7 @@ import {
 export default class MultipickDropdown extends Component {
     static propTypes = {
         data: PropTypes.array.isRequired,
+        values: PropTypes.array.isRequired,
         filteredData: PropTypes.array.isRequired,
         onChange: PropTypes.func.isRequired,
         searchAppearsAfterCount: PropTypes.number.isRequired,
@@ -28,12 +29,16 @@ export default class MultipickDropdown extends Component {
     handleItemChange = e => {
         const value = e.currentTarget.value;
         const checked = e.currentTarget.checked;
-        const data = this.props.data.slice();
-        const item = data.find(item => item.value === value);
-        // TODO: I still mutate the object here I think?
-        item.selected = checked;
-
-        this.props.onChange(data);
+        const values = this.props.values.slice();
+        const valueIndex = values.indexOf(value);
+        if (valueIndex >= 0) {
+            if (!checked) {
+                values.splice(valueIndex, 1);
+            }
+        } else if (checked) {
+            values.push(value);
+        }
+        this.props.onChange(values);
     };
 
     handleSearchChange = e => {
@@ -41,26 +46,15 @@ export default class MultipickDropdown extends Component {
     };
 
     selectAll = () => {
-        this._batchChangeSelected(true);
+        this.props.onChange(this.props.data.map(item => item.value));
     };
 
     selectNone = () => {
-        this._batchChangeSelected(false);
-    };
-
-    _batchChangeSelected = selected => {
-        const data = this.props.data.map(item => {
-            return {
-                value: item.value,
-                label: item.label,
-                selected,
-            };
-        });
-        this.props.onChange(data);
+        this.props.onChange([]);
     };
 
     renderItem = item => {
-        const checked = item.selected || false;
+        const checked = this.props.values.includes(item.value);
         return (
             <DropdownItem key={item.value} checked={checked}>
                 <input

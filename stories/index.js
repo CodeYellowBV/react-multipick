@@ -10,7 +10,6 @@ storiesOf('Multipick', module)
             {
                 value: '1',
                 label: 'Dinosaurus',
-                selected: true,
             },
             {
                 value: '2',
@@ -19,10 +18,15 @@ storiesOf('Multipick', module)
             {
                 value: '3',
                 label: 'Giraffes',
-                selected: true,
             },
         ];
-        return <Multipick data={DATA} onChange={action('change')} />;
+        return (
+            <Multipick
+                data={DATA}
+                values={['1', '3']}
+                onChange={action('change')}
+            />
+        );
     })
     .add('without any selections', () => {
         const DATA = [
