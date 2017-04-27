@@ -106,4 +106,32 @@ storiesOf('Multipick', module)
         return (
             <Multipick disabled data={SOME_DATA} onChange={action('change')} />
         );
+    })
+    .add('with Dutch translations', () => {
+        class MyComponent extends Component {
+            state = {
+                values: [],
+            };
+
+            handleChange = values => {
+                this.setState({ values });
+                action('change');
+            };
+
+            render() {
+                return (
+                    <Multipick
+                        data={SOME_DATA}
+                        values={this.state.values}
+                        onChange={this.handleChange}
+                        searchPlaceholder="Zoeken…"
+                        selectedText="$1 van de $2 geselecteerd"
+                        noneSelectedText="Geen geselecteerd"
+                        selectAllText="Alles"
+                        selectNoneText="Niks"
+                    />
+                );
+            }
+        }
+        return <MyComponent />;
     });
