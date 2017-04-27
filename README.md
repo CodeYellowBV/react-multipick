@@ -71,3 +71,13 @@ If you want it to always appear, you can change it to:
 ```
 
 You can change it to any other number you want to.
+
+## Contributing
+
+Contributions are very welcome! After forking this repository, you can run this from your terminal:
+
+```
+yarn && yarn storybook
+```
+
+Open http://localhost:9001 and you should see the Storybook examples. You can use this to test your code in.
