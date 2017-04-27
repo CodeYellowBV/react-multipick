@@ -4,6 +4,8 @@ A package for React that offers you a multiselect dropdown.
 It has buttons to select all or none of the items, and has search functionality.
 If there are more than 5 items, it will automatically show the search bar (this is configurable).
 
+[**Demo time**](https://codeyellowbv.github.io/react-multipick/)
+
 ## Install
 
 ```
