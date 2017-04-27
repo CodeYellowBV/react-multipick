@@ -54,7 +54,7 @@ export default class MultipickDropdown extends Component {
     };
 
     renderItem = item => {
-        const checked = this.props.values.includes(item.value);
+        const checked = this.props.values.indexOf(item.value) >= 0;
         return (
             <DropdownItem key={item.value} checked={checked}>
                 <input

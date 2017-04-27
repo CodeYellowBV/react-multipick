@@ -62,9 +62,11 @@ export default class Multipick extends Component {
     filterData(data, searchValue) {
         if (searchValue !== '') {
             return data.filter(item => {
-                return item.label
-                    .toLowerCase()
-                    .includes(searchValue.toLowerCase());
+                return (
+                    item.label
+                        .toLowerCase()
+                        .indexOf(searchValue.toLowerCase()) >= 0
+                );
             });
         }
         return data;

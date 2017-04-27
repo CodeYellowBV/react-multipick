@@ -1,7 +1,11 @@
 {
     "presets": [
-        "react",
-        "stage-2"
+        ["es2015", { "modules": false }],
+        "stage-2",
+        "react"
+    ],
+    "plugins": [
+        "external-helpers"
     ],
     "env": {
         "test": {
