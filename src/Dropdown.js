@@ -94,10 +94,10 @@ export default class MultipickDropdown extends Component {
                     ? this.renderSearch()
                     : null}
                 <DropdownActionBar>
-                    <DropdownAction onClick={this.selectAll}>
+                    <DropdownAction type="button" onClick={this.selectAll}>
                         {selectAllText}
                     </DropdownAction>
-                    <DropdownAction onClick={this.selectNone}>
+                    <DropdownAction type="button" onClick={this.selectNone}>
                         {selectNoneText}
                     </DropdownAction>
                 </DropdownActionBar>
