@@ -170,63 +170,75 @@ var MultipickDropdown = (function(_Component) {
             args[_key] = arguments[_key];
         }
 
-        return (_ret = ((_temp = ((_this = possibleConstructorReturn(
-            this,
-            (_ref =
-                MultipickDropdown.__proto__ ||
-                Object.getPrototypeOf(MultipickDropdown)).call.apply(
-                _ref,
-                [this].concat(args)
-            )
-        )), _this)), (_this.handleItemChange = function(e) {
-            var value = e.currentTarget.value;
-            var checked = e.currentTarget.checked;
-            var values = _this.props.values.slice();
-            var valueIndex = values.indexOf(value);
-            if (valueIndex >= 0) {
-                if (!checked) {
-                    values.splice(valueIndex, 1);
+        return (_ret = (
+            (_temp = (
+                (_this = possibleConstructorReturn(
+                    this,
+                    (_ref =
+                        MultipickDropdown.__proto__ ||
+                        Object.getPrototypeOf(MultipickDropdown)).call.apply(
+                        _ref,
+                        [this].concat(args)
+                    )
+                )),
+                _this
+            )),
+            (_this.handleItemChange = function(e) {
+                var value = e.currentTarget.value;
+                var checked = e.currentTarget.checked;
+                var values = _this.props.values.slice();
+                var valueIndex = values.indexOf(value);
+                if (valueIndex >= 0) {
+                    if (!checked) {
+                        values.splice(valueIndex, 1);
+                    }
+                } else if (checked) {
+                    values.push(value);
                 }
-            } else if (checked) {
-                values.push(value);
-            }
-            _this.props.onChange(values);
-        }), (_this.handleSearchChange = function(e) {
-            _this.props.onSearchChange(e.currentTarget.value);
-        }), (_this.selectAll = function() {
-            _this.props.onChange(
-                _this.props.data.map(function(item) {
-                    return item.value;
-                })
-            );
-        }), (_this.selectNone = function() {
-            _this.props.onChange([]);
-        }), (_this.renderItem = function(item) {
-            var checked = _this.props.values.indexOf(item.value) >= 0;
-            return React.createElement(
-                DropdownItem,
-                { key: item.value, checked: checked },
-                React.createElement('input', {
-                    type: 'checkbox',
-                    checked: checked,
-                    onChange: _this.handleItemChange,
-                    value: item.value,
-                }),
-                item.label
-            );
-        }), (_this.renderSearch = function() {
-            var _this$props = _this.props,
-                searchValue = _this$props.searchValue,
-                searchPlaceholder = _this$props.searchPlaceholder;
+                _this.props.onChange(values);
+            }),
+            (_this.handleSearchChange = function(e) {
+                _this.props.onSearchChange(e.currentTarget.value);
+            }),
+            (_this.selectAll = function() {
+                _this.props.onChange(
+                    _this.props.data.map(function(item) {
+                        return item.value;
+                    })
+                );
+            }),
+            (_this.selectNone = function() {
+                _this.props.onChange([]);
+            }),
+            (_this.renderItem = function(item) {
+                var checked = _this.props.values.indexOf(item.value) >= 0;
+                return React.createElement(
+                    DropdownItem,
+                    { key: item.value, checked: checked },
+                    React.createElement('input', {
+                        type: 'checkbox',
+                        checked: checked,
+                        onChange: _this.handleItemChange,
+                        value: item.value,
+                    }),
+                    item.label
+                );
+            }),
+            (_this.renderSearch = function() {
+                var _this$props = _this.props,
+                    searchValue = _this$props.searchValue,
+                    searchPlaceholder = _this$props.searchPlaceholder;
 
-            return React.createElement(DropdownSearch, {
-                type: 'search',
-                autoFocus: true,
-                value: searchValue,
-                onChange: _this.handleSearchChange,
-                placeholder: searchPlaceholder,
-            });
-        }), _temp)), possibleConstructorReturn(_this, _ret);
+                return React.createElement(DropdownSearch, {
+                    type: 'search',
+                    autoFocus: true,
+                    value: searchValue,
+                    onChange: _this.handleSearchChange,
+                    placeholder: searchPlaceholder,
+                });
+            }),
+            _temp
+        )), possibleConstructorReturn(_this, _ret);
     }
 
     createClass(MultipickDropdown, [
@@ -250,12 +262,12 @@ var MultipickDropdown = (function(_Component) {
                         null,
                         React.createElement(
                             DropdownAction,
-                            { onClick: this.selectAll },
+                            { type: 'button', onClick: this.selectAll },
                             selectAllText
                         ),
                         React.createElement(
                             DropdownAction,
-                            { onClick: this.selectNone },
+                            { type: 'button', onClick: this.selectNone },
                             selectNoneText
                         )
                     ),
@@ -303,54 +315,65 @@ var Multipick = (function(_Component) {
             args[_key] = arguments[_key];
         }
 
-        return (_ret = ((_temp = ((_this = possibleConstructorReturn(
-            this,
-            (_ref =
-                Multipick.__proto__ ||
-                Object.getPrototypeOf(Multipick)).call.apply(
-                _ref,
-                [this].concat(args)
-            )
-        )), _this)), (_this.state = {
-            opened: false,
-            searchValue: '',
-        }), (_this.generateButtonText = function() {
-            var _this$props = _this.props,
-                data = _this$props.data,
-                values = _this$props.values,
-                selectedText = _this$props.selectedText,
-                noneSelectedText = _this$props.noneSelectedText;
+        return (_ret = (
+            (_temp = (
+                (_this = possibleConstructorReturn(
+                    this,
+                    (_ref =
+                        Multipick.__proto__ ||
+                        Object.getPrototypeOf(Multipick)).call.apply(
+                        _ref,
+                        [this].concat(args)
+                    )
+                )),
+                _this
+            )),
+            (_this.state = {
+                opened: false,
+                searchValue: '',
+            }),
+            (_this.generateButtonText = function() {
+                var _this$props = _this.props,
+                    data = _this$props.data,
+                    values = _this$props.values,
+                    selectedText = _this$props.selectedText,
+                    noneSelectedText = _this$props.noneSelectedText;
 
-            if (values.length > 0) {
-                return selectedText
-                    .replace('$1', values.length)
-                    .replace('$2', data.length);
-            }
-            return noneSelectedText;
-        }), (_this.handleToggle = function() {
-            _this.setState(function(prevState) {
-                return { opened: !prevState.opened };
-            });
-        }), (_this.handleSearchChange = function(searchValue) {
-            _this.setState({
-                searchValue: searchValue,
-            });
-        }), (_this.renderDropdown = function() {
-            if (_this.state.opened) {
-                return React.createElement(
-                    MultipickDropdown,
-                    _extends({}, _this.props, {
-                        filteredData: _this.filterData(
-                            _this.props.data,
-                            _this.state.searchValue
-                        ),
-                        searchValue: _this.state.searchValue,
-                        onSearchChange: _this.handleSearchChange,
-                    })
-                );
-            }
-            return null;
-        }), _temp)), possibleConstructorReturn(_this, _ret);
+                if (values.length > 0) {
+                    return selectedText
+                        .replace('$1', values.length)
+                        .replace('$2', data.length);
+                }
+                return noneSelectedText;
+            }),
+            (_this.handleToggle = function() {
+                _this.setState(function(prevState) {
+                    return { opened: !prevState.opened };
+                });
+            }),
+            (_this.handleSearchChange = function(searchValue) {
+                _this.setState({
+                    searchValue: searchValue,
+                });
+            }),
+            (_this.renderDropdown = function() {
+                if (_this.state.opened) {
+                    return React.createElement(
+                        MultipickDropdown,
+                        _extends({}, _this.props, {
+                            filteredData: _this.filterData(
+                                _this.props.data,
+                                _this.state.searchValue
+                            ),
+                            searchValue: _this.state.searchValue,
+                            onSearchChange: _this.handleSearchChange,
+                        })
+                    );
+                }
+                return null;
+            }),
+            _temp
+        )), possibleConstructorReturn(_this, _ret);
     }
 
     createClass(Multipick, [
